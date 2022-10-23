@@ -1,9 +1,7 @@
 package fr.pantheonsorbonne.miage;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -12,13 +10,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
-import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 import org.junit.jupiter.api.Test;
@@ -52,8 +50,8 @@ public class DiplomaGeneratorTest {
 
 			// write the bytes of an image version of a reference diploma
 			ByteArrayOutputStream referenceImageData = new ByteArrayOutputStream();
-			writePDFImageRasterBytes(new File("src/test/resources/nicolas.pdf"), referenceImageData);
-
+			Path testFilePath = Paths.get("src", "test", "resources", "nicolas.pdf").toAbsolutePath();
+			writePDFImageRasterBytes(new File(testFilePath.toString()), referenceImageData);
 			// check that the content is the same
 			assertArrayEquals(referenceImageData.toByteArray(), generatedImageData.toByteArray());
 		} catch (Exception e) {
@@ -78,7 +76,7 @@ public class DiplomaGeneratorTest {
 		ByteArrayOutputStream generatedFileContent = new ByteArrayOutputStream();
 		File generatedFileTarget = Files.createTempFile("prefix_", "_suffic").toFile();
 		MiageDiplomaGenerator generator = new MiageDiplomaGenerator(stu, date);
-		new DiplomaFileAdapter(generator).generateFile(generatedFileTarget.getPath());
+		new DiplomaFileAdapter(generator).generateFile(generatedFileTarget.toPath().toString());
 		FileInputStream generatedFileReader = new FileInputStream(generatedFileTarget);
 		ByteStreams.copy(generatedFileReader, generatedFileContent);
 		return generatedFileTarget;
