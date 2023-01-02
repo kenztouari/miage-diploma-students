@@ -19,8 +19,12 @@ import fr.pantheonsorbonne.miage.diploma.DiplomaSnippet;
  * to use it, simply replace
  * DiplomaGenerator generator = new MiageDiplomaGenerator(...);
  * by
+<<<<<<< HEAD
  * EncryptedDiplomaGeneratorDecorator generator = new EncryptedDiplomaGeneratorDecorator(new MiageDiplomaGenerator(...));
 
+=======
+ * EncryptedDiplomaGeneratorDecorator generator = new EncryptedDiplomaGeneratorDecorator(new MiageDiplomaGenerator(...)); 
+>>>>>>> origin/encryption
  * @author nherbaut
  *
  */
