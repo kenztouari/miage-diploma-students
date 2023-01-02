@@ -6,13 +6,11 @@ public class Student {
 	private String title;
 	private String password;
 
-
 	public Student(int id, String name, String title, String password) {
 		this.name = name;
 		this.title = title;
 		this.id = id;
 		this.password = password;
-
 	}
 
 	private String name;
@@ -46,5 +44,4 @@ public class Student {
 		return this.getTitle() + " " + this.getName();
 	}
 
-	
 }
